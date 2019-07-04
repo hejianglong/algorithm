@@ -98,14 +98,14 @@ public class LRUSingleLinkedList<T> {
 
     private static class Node<T> {
 
-        public Node next;
+        private Node next;
 
-        public T data;
+        private T data;
 
-        public Node() {
+        private Node() {
         }
 
-        public Node(T data) {
+        private Node(T data) {
             this.data = data;
         }
 

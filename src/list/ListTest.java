@@ -3,19 +3,14 @@ package list;
 public class ListTest {
 
     public static void main(String[] args) {
-        SingleLinkedList list = new SingleLinkedList();
+        singleLinkedListTest2();
+    }
 
-        for(int i = 0; i < 20; i++) {
-            list.add(i);
-        }
-        list.printAll();
-        // 翻转输出
-        list.reversePrintAll();
-        // 翻转
-        list.reverse();
-        list.printAll();
-        // 翻转输出
-        list.reversePrintAll();
+    private static void singleLinkedListTest2() {
+        LinkedListAlgo.Node node1 = LinkedListAlgo.initTestList(new int[]{1,3,5,7,9});
+        LinkedListAlgo.Node node2 = LinkedListAlgo.initTestList(new int[]{2,4,6,8,10});
+        LinkedListAlgo.Node merageNode = LinkedListAlgo.mergeSortedLists(node1, node2);
+        LinkedListAlgo.printAll(merageNode);
     }
 
 }
