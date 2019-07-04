@@ -55,8 +55,7 @@ public class LRUSingleLinkedList<T> {
         // 缓存已满的话，删除最后一个节点
         // 将新的数据插入头结点
         if (length == capacity) {
-            Node headNextNode = head.next;
-            currentNode.next = headNextNode;
+            currentNode.next = head.next;
             head.next = currentNode;
             if (preNode != null) {
                 preNode.next = null;
@@ -68,9 +67,8 @@ public class LRUSingleLinkedList<T> {
     }
 
     private void insertNodeAtBegin(T val) {
-        Node firstNode = head.next;
         Node currentNode = new Node(val);
-        currentNode.next = firstNode;
+        currentNode.next = head.next;
         head.next = currentNode;
         length++;
     }

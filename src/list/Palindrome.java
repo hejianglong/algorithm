@@ -5,4 +5,7 @@ package list;
  */
 public class Palindrome {
 
+    public static void main(String[] args) {
+        LRUSingleLinkedList list = new LRUSingleLinkedList(10);
+    }
 }
