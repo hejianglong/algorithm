@@ -7,7 +7,7 @@ public class LRU {
 
     public static void main(String[] args) {
         LRUSingleLinkedList lru = new LRUSingleLinkedList(10);
-        for(int i = 0; i < 10; i++) {
+        for(int i = 0; i < 0; i++) {
             lru.add(i);
         }
         lru.print();
