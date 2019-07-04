@@ -9,8 +9,13 @@ public class ListTest {
             list.add(i);
         }
         list.printAll();
-        //list.reversePrintAll();
+        // 翻转输出
+        list.reversePrintAll();
+        // 翻转
         list.reverse();
         list.printAll();
+        // 翻转输出
+        list.reversePrintAll();
     }
+
 }

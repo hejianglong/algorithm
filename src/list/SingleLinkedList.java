@@ -31,23 +31,19 @@ public class SingleLinkedList<T> {
      * 链表翻转
      */
     public void reverse() {
-        System.out.println(length);
-        Node node = head;
-        int i = 0;
-        while (node.next!= null) {
-            Node currentNode = node.next;
-            Node tailNode = tail;
-            Node tailPreNode = tail.pre;
-            System.out.println(node.data + " -- " +tailNode.data);
-            node.next = tailNode;
-            tailNode.next = currentNode;
-            tailPreNode.next = null;
-            tail = tailPreNode;
-            node = currentNode;
-            if (++i == length - 1) {
-                return;
-            }
+        Node newHead = new Node();
+        Node newTail = new Node(tail.data);
+        newHead.next = newTail;
+
+        Node node = tail;
+        while ((node = node.pre) != null) {
+            Node currentNode = new Node(node.data);
+            newTail.next = currentNode;
+            currentNode.pre = newTail;
+            newTail = currentNode;
         }
+        head = newHead;
+        tail = newTail;
     }
 
     public void printAll() {
@@ -80,6 +76,16 @@ public class SingleLinkedList<T> {
 
         public Node(T data) {
             this.data = data;
+        }
+
+        public Node(Node next, Node pre, T data) {
+            this.next = next;
+            this.pre = pre;
+            this.data = data;
+        }
+
+        public static Node clone(Node beforeNode) {
+            return new Node<>(beforeNode.next, beforeNode.pre, beforeNode.data);
         }
 
         @Override
