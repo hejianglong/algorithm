@@ -68,6 +68,35 @@ public class LinkedListAlgo {
     }
 
     /**
+     * 删除链表倒数的第 position 个节点
+     * @param list
+     * @param position
+     * @return
+     */
+    public static Node deleteLastNode(Node list, int position) {
+        if (position <= 0) {
+            return list;
+        }
+        int length = 0;
+        Node node = list;
+        while (node != null) {
+            node = node.next;
+            length++;
+        }
+        if (position > length) {
+            return list;
+        }
+        // 根据倒数位置求正数的位置
+        int positiveSeqPosition = length - position;
+        if (positiveSeqPosition == 0) {
+            return list.next;
+        }
+        // 倒数位置在正数后一个
+        positiveSeqPosition = positiveSeqPosition + 1;
+        return deleteNode(list, positiveSeqPosition);
+    }
+
+    /**
      * 有序链表合并
      * @param la
      * @param lb
