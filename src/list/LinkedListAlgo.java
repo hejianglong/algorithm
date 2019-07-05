@@ -179,6 +179,23 @@ public class LinkedListAlgo {
         return head;
     }
 
+    public static boolean checkCircle(Node list) {
+        if (list == null || list.next == null) {
+            return false;
+        }
+        Node fast = list.next;
+        Node slow = list;
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+
+            if (fast == slow) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static void printAll(Node list) {
         Node p = list;
         while (p != null) {
@@ -186,6 +203,17 @@ public class LinkedListAlgo {
             p = p.next;
         }
         System.out.println();
+    }
+
+    /**
+     * 构建循环链表
+     * @return
+     */
+    public static Node buildCircleNode(int[] data) {
+        Node node = initTestList(data);
+        Node lastNode = findLastNode(node);
+        lastNode.next = node;
+        return node;
     }
 
     public static Node initTestList(int[] data) {

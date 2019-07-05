@@ -14,8 +14,9 @@ public class ListTest {
         //LinkedListAlgo.Node delNodel = LinkedListAlgo.deleteNode(node1, 1);
         //LinkedListAlgo.Node delNodel = LinkedListAlgo.deleteLastNode(node1, 2);
         //LinkedListAlgo.Node middleNode = LinkedListAlgo.findMiddleNode(node1);
-        LinkedListAlgo.Node delNodel = LinkedListAlgo.deleteLastKth(node1, 2);
-        LinkedListAlgo.printAll(delNodel);
+        //LinkedListAlgo.Node delNodel = LinkedListAlgo.deleteLastKth(node1, 2);
+        LinkedListAlgo.Node circleNode = LinkedListAlgo.buildCircleNode(new int[]{2, 4, 5, 7, 9});
+        System.out.println("是否存在环: " + LinkedListAlgo.checkCircle(circleNode));
     }
 
 }
