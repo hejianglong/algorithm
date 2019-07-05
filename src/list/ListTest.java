@@ -13,8 +13,9 @@ public class ListTest {
         //LinkedListAlgo.printAll(merageNode);
         //LinkedListAlgo.Node delNodel = LinkedListAlgo.deleteNode(node1, 1);
         //LinkedListAlgo.Node delNodel = LinkedListAlgo.deleteLastNode(node1, 2);
-        LinkedListAlgo.Node middleNode = LinkedListAlgo.findMiddleNode(node1);
-        LinkedListAlgo.printAll(middleNode);
+        //LinkedListAlgo.Node middleNode = LinkedListAlgo.findMiddleNode(node1);
+        LinkedListAlgo.Node delNodel = LinkedListAlgo.deleteLastKth(node1, 2);
+        LinkedListAlgo.printAll(delNodel);
     }
 
 }

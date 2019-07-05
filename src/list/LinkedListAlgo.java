@@ -97,6 +97,37 @@ public class LinkedListAlgo {
     }
 
     /**
+     * 删除倒数第 K 个节点（优化算法)
+     * @param list
+     * @param k
+     * @return
+     */
+    public static Node deleteLastKth(Node list, int k) {
+        Node fast = list;
+        int i = 1;
+        while (fast != null && i < k) {
+            fast = fast.next;
+            ++i;
+        }
+        if (fast == null) {
+            return list;
+        }
+        Node slow = list;
+        Node prev = null;
+        while (fast.next != null) {
+            fast = fast.next;
+            prev = slow;
+            slow = slow.next;
+        }
+        if (prev == null) {
+            return list.next;
+        } else {
+            prev.next = prev.next.next;
+        }
+        return list;
+    }
+
+    /**
      * 寻找中间节点
      * @param list
      * @return
