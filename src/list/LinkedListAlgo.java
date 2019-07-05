@@ -97,6 +97,22 @@ public class LinkedListAlgo {
     }
 
     /**
+     * 寻找中间节点
+     * @param list
+     * @return
+     */
+    public static Node findMiddleNode(Node list) {
+        if (list == null) return null;
+        Node fast = list;
+        Node slow = list;
+        while (fast.next != null && fast.next.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        return slow;
+    }
+
+    /**
      * 有序链表合并
      * @param la
      * @param lb
