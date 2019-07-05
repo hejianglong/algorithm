@@ -144,6 +144,51 @@ public class LinkedListAlgo {
     }
 
     /**
+     * 判断是否是回文连表
+     * @param list
+     * @return
+     */
+    public static boolean isPalindrome(Node list) {
+        if (list == null) {
+            return false;
+        }
+        int length = 0;
+        Node current = list;
+        while (current != null) {
+            current = current.next;
+            length++;
+        }
+        // 找到中间节点
+        Node fast = list;
+        Node slow = list;
+        while (fast.next != null && fast.next.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        Node middleNode = length % 2 == 0 ? slow.next : slow;
+        // 反转
+        Node currentNode = middleNode;
+        Node pre = null;
+        while (currentNode != null) {
+            Node nextNode = currentNode.next;
+            currentNode.next = pre;
+            pre = currentNode;
+            currentNode = nextNode;
+        }
+        // 比较
+        Node compareNode = pre;
+        Node originNode = list;
+        while (compareNode != null) {
+            if (compareNode.data != originNode.data) {
+                return false;
+            }
+            compareNode = compareNode.next;
+            originNode = originNode.next;
+        }
+        return true;
+    }
+
+    /**
      * 有序链表合并
      * @param la
      * @param lb
