@@ -39,6 +39,35 @@ public class LinkedListAlgo {
     }
 
     /**
+     * 删除链表的某个节点
+     * @param list
+     * @param position
+     * @return
+     */
+    public static Node deleteNode(Node list, int position) {
+        if (position <= 0) {
+            return list;
+        }
+        int i = 0;
+        Node node = list;
+        Node pre = null;
+        if (position == 1) {
+            return list.next;
+        }
+        while (node != null) {
+            i++;
+            if (i == position - 1) {
+                pre = node;
+            }
+            if(i == position) {
+               pre.next = node.next;
+            }
+            node = node.next;
+        }
+        return list;
+    }
+
+    /**
      * 有序链表合并
      * @param la
      * @param lb
