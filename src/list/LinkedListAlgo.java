@@ -45,8 +45,33 @@ public class LinkedListAlgo {
      * @return
      */
     public static Node mergeSortedLists(Node la, Node lb) {
-
-        return null;
+        Node p = la;
+        Node q = lb;
+        Node head;
+        if (p.data < q.data) {
+            head = p;
+            p = p.next;
+        } else {
+            head = q;
+            q = q.next;
+        }
+        Node r = head;
+        while (p != null && q != null) {
+            if (p.data < q.data) {
+                r.next = p;
+                p = p.next;
+            } else {
+                r.next = q;
+                q = q.next;
+            }
+            r = r.next;
+        }
+        if (p == null) {
+            r.next = q;
+        } else {
+            r.next = p;
+        }
+        return head;
     }
 
     public static void printAll(Node list) {
