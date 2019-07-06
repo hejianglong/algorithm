@@ -1,6 +1,6 @@
 package stack;
 
-public class Stack {
+public class ArrayStack {
 
     int size = 5;
 
