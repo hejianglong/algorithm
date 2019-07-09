@@ -2,19 +2,23 @@ package sort;
 
 /**
  * 计数排序
+ * 基数排序
  */
-public class SortT {
+public class CountingSort {
 
     public static void main(String[] args) {
         int[] c = new int[]{2,5,3,0,2,3,0,3};
-        sortJ(c);
+        sort(c);
         for (int i = 0; i < c.length; i++) {
             System.out.println(c[i]);
         }
     }
 
-
-    private static void sortJ(int[] arr) {
+    /**
+     * 计数排序
+     * @param arr
+     */
+    private static void sort(int[] arr) {
         if (arr == null || arr.length == 0) {
             return;
         }
