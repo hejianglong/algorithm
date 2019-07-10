@@ -13,6 +13,31 @@ public class Search {
         System.out.println(p3);
         int p4 = searchPositionFirstGE(arr2, 8);
         System.out.println(p4);
+        int p5 = searchPositionLastLE(arr, 2);
+        System.out.println(p5);
+    }
+
+    /**
+     * 查找最后一个小于等于该值的数
+     * @param arr
+     * @param target
+     * @return
+     */
+    private static int searchPositionLastLE(int[] arr, int target) {
+        int low = 0;
+        int height = arr.length - 1;
+        while (low <= height) {
+            int middle = low + ((height - low) >> 2);
+            if (arr[middle] <= target) {
+                if (middle == arr.length - 1 || arr[middle + 1] > target) {
+                    return middle;
+                }
+                low = middle + 1;
+            } else {
+                height = middle - 1;
+            }
+        }
+        return -1;
     }
 
     /**
@@ -54,10 +79,10 @@ public class Search {
             } else if (target < arr[middle]) {
                 height = middle + 1;
             } else {
-                if (middle == 0 || arr[middle + 1] != target) {
+                if (middle == arr.length - 1 || arr[middle + 1] != target) {
                     return middle;
                 }
-                height += 1;
+                low = middle + 1;
             }
         }
         return -1;
