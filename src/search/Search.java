@@ -11,6 +11,31 @@ public class Search {
         System.out.println(p2);
         int p3 = searchPositionLastMatch(arr2, 8);
         System.out.println(p3);
+        int p4 = searchPositionFirstGE(arr2, 8);
+        System.out.println(p4);
+    }
+
+    /**
+     * 查找第一个大于等于 target
+     * @param arr
+     * @param target
+     * @return
+     */
+    private static int searchPositionFirstGE(int[] arr, int target) {
+        int low = 0;
+        int height = arr.length - 1;
+        while (low <= height) {
+            int middle = low + ((height - low) >> 2);
+            if (arr[middle] >= target) {
+                if (middle == 0 || arr[middle - 1] < target) {
+                    return middle;
+                }
+                height = middle - 1;
+            } else {
+                low = middle + 1;
+            }
+        }
+        return -1;
     }
 
     /**
