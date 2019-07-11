@@ -15,6 +15,55 @@ public class Search {
         System.out.println(p4);
         int p5 = searchPositionLastLE(arr, 2);
         System.out.println(p5);
+        int[] nums = new int[]{1,2,3,0};
+        System.out.println(search(nums, 3));
+    }
+
+    public static int search(int[] nums, int target) {
+        int split = 0;
+        int length = nums.length;
+        for (int i = 0; i < length; i++) {
+            if (i < length - 1 && nums[i+1] < nums[i]) {
+                split = i + 1;
+                break;
+            }
+        }
+        int[] arr = new int[length];
+        int tmpSplit = split;
+        if (split > 0) {
+            for (int i = 0; i < length; i++) {
+                if (split == length) {
+                    split = 0;
+                }
+                arr[i] = nums[split++];
+            }
+        } else {
+            arr = nums;
+        }
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + ",");
+        }
+        int low = 0;
+        int height = length - 1;
+        int position = -1;
+        while (low <= height) {
+            int middle = low + ((height - low) >> 2);
+            if (target > arr[middle]) {
+                low = middle + 1;
+            } else if (target < arr[middle]) {
+                height = middle - 1;
+            } else {
+                position = middle;
+                break;
+            }
+        }
+        if (position != -1) {
+            position = tmpSplit + position;
+            if (position > length - 1) {
+                position = position - length;
+            }
+        }
+        return position;
     }
 
     /**
