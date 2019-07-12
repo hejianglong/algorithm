@@ -47,6 +47,60 @@ public class BinarySearchTree {
         return null;
     }
 
+    public void delete(int val) {
+        Node p = tree;
+        Node pre = null;
+        while (p != null) {
+            if (p.val < val) {
+                pre = p;
+                p = p.right;
+            } else if (p.val > val) {
+                pre = p;
+                p = p.left;
+            } else {
+                // 删除逻辑
+                // 如果处于叶子结点，直接删除
+                if (p.left == null && p.right == null) {
+                    // 如果大于上一个结点的值，证明需要删除的是右节点
+                    if (pre.val < val) {
+                        pre.right = null;
+                        return;
+                    }
+                    pre.left = null;
+                    return;
+                } else if (p.left == null || p.right == null) { // 如果删除结点下面只有单个结点
+                    if (pre.val < val) {
+                        pre.right = (p.left == null ? p.right : p.left);
+                        return;
+                    }
+                    pre.left = (p.left == null ? p.right : p.left);
+                    return;
+                } else { // 如果删除结点下面有多个结点
+                    // 找到删除结点右子树最小结点，替换掉删除的结点
+                    Node replaceNode = p.right;
+                    Node preReplaceNode = null;
+                    while (replaceNode.left != null) {
+                        preReplaceNode = replaceNode;
+                        replaceNode = replaceNode.left;
+                    }
+                    // 右子树不止有一个结点，存在大于等于 1个左结点
+                    if (replaceNode.val < p.right.val) {
+                        preReplaceNode.left = null;
+                        replaceNode.right = p.right;
+                    }
+                    replaceNode.left = p.left;
+                    // 待删除的结点是父节点的右结点
+                    if (pre.val < val) {
+                        pre.right = replaceNode;
+                        return;
+                    }
+                    pre.left = replaceNode;
+                    return;
+                }
+            }
+        }
+    }
+
     public void preOrder() {
         System.out.println("前序遍历结果:");
         preOrder(tree);

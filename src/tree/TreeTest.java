@@ -8,18 +8,29 @@ public class TreeTest {
 
     public static void main(String[] args) {
         BinarySearchTree tree = new BinarySearchTree();
-        tree.put(6);
-        tree.put(4);
-        tree.put(8);
-        tree.put(2);
-        tree.put(5);
-        tree.put(1);
-        tree.put(3);
-        tree.put(7);
-        tree.put(9);
-        System.out.println(tree.find(4));
+        tree.put(33);
+        tree.put(16);
+        tree.put(50);
+        tree.put(13);
+        tree.put(18);
+        tree.put(15);
+        tree.put(17);
+        tree.put(25);
+        tree.put(19);
+        tree.put(27);
+        tree.put(34);
+        tree.put(58);
+        tree.put(51);
+        tree.put(66);
+        tree.put(55);
         tree.preOrder();
         tree.inOrder();
         tree.afterOrder();
+        tree.delete(18);
+        tree.inOrder();
+        tree.delete(13);
+        tree.inOrder();
+        tree.delete(55);
+        tree.inOrder();
     }
 }
