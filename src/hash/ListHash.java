@@ -26,14 +26,14 @@ public class ListHash<T> {
     }
 
     public T get(String key) {
-        return findVal(hash(key));
+        return findVal(hash(key), key);
     }
 
     public T put(String key, T val) {
         return putVal(hash(key), key, val);
     }
 
-    private T findVal(int hash) {
+    private T findVal(int hash, String key) {
         int length = table.length;
         int index = (length - 1) & hash;
         if (table == null || length == 0) {
@@ -45,7 +45,7 @@ public class ListHash<T> {
         }
         currentNode = currentNode.next;
         while (currentNode != null) {
-            if (currentNode.hash == hash) {
+            if (currentNode.hash == hash && (currentNode.key.equals(key))) {
                 return currentNode.val;
             }
             currentNode = currentNode.next;
@@ -69,7 +69,7 @@ public class ListHash<T> {
             // 如果槽位有值，便利链表
             while (currentNode != null) {
                 // 如果已经存在对应的 key
-                if (currentNode.hash == hash) {
+                if (currentNode.hash == hash && currentNode.key.equals(key)) {
                     result = currentNode.val;
                     currentNode.val = val;
                     break;
