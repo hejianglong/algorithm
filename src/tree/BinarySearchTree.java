@@ -101,6 +101,22 @@ public class BinarySearchTree {
         }
     }
 
+    public Node findMaxValue() {
+        Node p = tree;
+        while (p.right != null) {
+            p = p.right;
+        }
+        return p;
+    }
+
+    public Node findMinValue() {
+        Node p = tree;
+        while (p.left != null) {
+            p = p.left;
+        }
+        return p;
+    }
+
     public void preOrder() {
         System.out.println("前序遍历结果:");
         preOrder(tree);

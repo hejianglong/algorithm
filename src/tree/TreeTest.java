@@ -32,5 +32,7 @@ public class TreeTest {
         tree.inOrder();
         tree.delete(55);
         tree.inOrder();
+        System.out.println("最大值:" + tree.findMaxValue());
+        System.out.println("最小值:" + tree.findMinValue());
     }
 }
