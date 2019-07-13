@@ -99,9 +99,6 @@ public class LRU<K,V> {
     }
 
     private V putVal(int hash, K key, V val) {
-        if (hash("key:50") == hash) {
-            int a = 1;
-        }
         int index = 0;
         if (table == null || table.length == 0) {
             resize();
@@ -157,6 +154,7 @@ public class LRU<K,V> {
                     while (hNode != null) {
                         if (!searchSuccess && hNode.next != null && hNode.next.hash == head.hash && (hNode.next.key == head.key || hNode.next.key.equals(head.key))) {
                             hPreHeaderNode = hNode;
+                            searchSuccess = true;
                         }
                         hNode = hNode.hNext;
                     }
@@ -164,12 +162,6 @@ public class LRU<K,V> {
                     if (hNode == null) {
                         // 水平链表加入
                         hPre.hNext = newNode;
-                        if (hash("key:61") == hash) {
-                            int a = 1;
-                        }
-                        if (hash("key:49") == hash) {
-                            int a = 1;
-                        }
                         // 水平链删除
                         if (hPreHeaderNode != null) {
                             hPreHeaderNode.hNext = head.hNext;
