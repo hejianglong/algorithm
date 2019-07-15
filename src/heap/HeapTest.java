@@ -27,6 +27,55 @@ public class HeapTest {
         int rs = test.findKthLargest(a, 4);
         System.out.println();
         System.out.println(rs);
+        test.findTopK();
+    }
+
+    /**
+     * 构造小顶堆 寻找 TOP K
+     * 假设 K = 6
+     */
+    public void findTopK() {
+        // 基于原始数据构造小顶堆
+        int[] a = new int[]{10,12,8,7,15,6};
+        int n = a.length;
+        for (int i = n/2; i >= 0; i--) {
+            smallHeapify(a, n, i);
+        }
+        System.out.println("构建小顶堆");
+        for (int i = 0; i < a.length; i++) {
+            System.out.print(a[i] + ",");
+        }
+        System.out.println();
+        // 插入值 13
+        int data = 13;
+        insert(a, data);
+        System.out.println("插入值 13 后");
+        for (int i = 0; i < a.length; i++) {
+            System.out.print(a[i] + ",");
+        }
+    }
+
+    private void insert(int[] a, int data) {
+        if (data > a[0]) {
+            a[0] = data;
+            smallHeapify(a, a.length, 0);
+        }
+    }
+
+    private void smallHeapify(int[] a, int length, int i) {
+        for (;;) {
+            int minPos = i;
+            if (i * 2 + 1 < length && a[i] > a[i * 2 + 1]) {
+                minPos = i * 2 + 1;
+            }
+            if (i * 2 + 2 < length && a[minPos] > a[i * 2 + 2]) {
+                minPos = i * 2 + 2;
+            }
+            if (minPos == i) {
+                break;
+            }
+            swap(a, i, minPos);
+        }
     }
 
     public int findKthLargest(int[] nums, int k) {
@@ -44,7 +93,6 @@ public class HeapTest {
             p--;
             heapify(nums, p, 0);
         }
-
         return 1;
     }
 
