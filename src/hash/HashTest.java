@@ -3,7 +3,7 @@ package hash;
 public class HashTest {
 
     public static void main(String[] args) {
-        arrayHashTest();
+        lruTest();
     }
 
     private static void listHashTest() {
@@ -28,5 +28,14 @@ public class HashTest {
         int v = hash.put("key:13", 1293);
         System.out.println(v);
         System.out.println(hash.get("key:13"));
+    }
+
+    private static void lruTest() {
+        LRU<String, Integer> lru = new LRU(10);
+        for (int i = 0; i < 300; i++) {
+            lru.put("key:" + i, i);
+        }
+        Integer value = lru.find("key:289");
+        System.out.println(value);
     }
 }
