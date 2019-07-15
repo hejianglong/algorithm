@@ -12,8 +12,15 @@ public class Heap {
         for (int i = 0; i < a.length; i++) {
             System.out.print(a[i] + ",");
         }
-        sort(a, 9);
         System.out.println();
+        removeMax(a);
+        System.out.println("删除最大结点");
+        for (int i = 0; i < a.length; i++) {
+            System.out.print(a[i] + ",");
+        }
+        System.out.println();
+        sort(a, 9);
+        System.out.println("排序");
         for (int i = 0; i < a.length; i++) {
             System.out.print(a[i] + ",");
         }
@@ -34,6 +41,15 @@ public class Heap {
         }
     }
 
+    private static void removeMax(int[] a) {
+        if (a == null || a.length == 0) {
+            return;
+        }
+        int n = a.length - 1;
+        a[1] = a[n];
+        heapify(a, n - 1, 1);
+    }
+
     private static void heapify(int[] a, int n, int i) {
         for (;;) {
             int maxPos = i;
@@ -47,6 +63,7 @@ public class Heap {
                 break;
             }
             swap(a, i, maxPos);
+            i = maxPos;
         }
     }
 
