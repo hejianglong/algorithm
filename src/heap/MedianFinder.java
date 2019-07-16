@@ -135,6 +135,7 @@ public class MedianFinder {
 
     private void smallHeapify(int num) {
         smallHeap[smallCount++] = num;
+
         int i = smallCount - 1;
         while (smallCount/2 > 0 && smallHeap[i] < smallHeap[i/2]) {
             swap(smallHeap, i, i/2);
