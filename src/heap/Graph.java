@@ -11,6 +11,8 @@ public class Graph {
 
     private LinkedList<Integer>[] adj;
 
+    private boolean found = false;
+
     public static void main(String[] args) {
         Graph g = new Graph(8);
         g.addEdge(0, 1);
@@ -27,6 +29,8 @@ public class Graph {
         System.out.println();
         List<Integer> friends = g.relation(0, 5);
         friends.stream().forEach(s -> System.out.println(s));
+        System.out.println("深度遍历");
+        g.dfs(0,6);
     }
 
     public Graph(int v) {
@@ -72,6 +76,35 @@ public class Graph {
                     queue.add(q);
                     visited[q] = true;
                 }
+            }
+        }
+    }
+
+    public void dfs(int s, int t) {
+        found = false;
+        boolean[] visited = new boolean[v];
+        int[] prev = new int[v];
+        for (int i = 0; i < v; i++) {
+            prev[i] = -1;
+        }
+        recurDfs(s, t, visited, prev);
+        print(prev, s, t);
+    }
+
+    private void recurDfs(int w, int t, boolean[] visited, int[] prev) {
+        if (found == true) {
+            return;
+        }
+        if (w == t) {
+            found = true;
+            return;
+        }
+        visited[w] = true;
+        for (int i = 0; i < adj[w].size(); i++) {
+            int q = adj[w].get(i);
+            if (!visited[q]) {
+                prev[q] = w;
+                recurDfs(q, t, visited, prev);
             }
         }
     }
