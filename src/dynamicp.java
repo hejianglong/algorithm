@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -28,6 +30,43 @@ public class dynamicp {
         System.out.println("动态规划生成树如下");
         int min = PascalsTriangle.path(data, 5);
         System.out.println("杨辉三角到达低端最短结点值合为: " + min);
+
+        List<List<Integer>> lists = new ArrayList<>();
+        List<Integer> l1 = new ArrayList<>();
+        List<Integer> l2 = new ArrayList<>();
+        List<Integer> l3 = new ArrayList<>();
+        l1.add(-1);
+
+        l2.add(2);
+        l2.add(3);
+
+        l3.add(1);
+        l3.add(-1);
+        l3.add(-3);
+        lists.add(l1);
+        lists.add(l2);
+        lists.add(l3);
+
+/*        List<Integer> l3 = new ArrayList<>();
+        l3.add(2);
+        List<Integer> l4 = new ArrayList<>();
+        l4.add(3);
+        l4.add(4);
+        List<Integer> l5 = new ArrayList<>();
+        l5.add(6);
+        l5.add(5);
+        l5.add(7);
+        List<Integer> l6 = new ArrayList<>();
+        l6.add(4);
+        l6.add(1);
+        l6.add(8);
+        l6.add(3);
+        lists.add(l3);
+        lists.add(l4);
+        lists.add(l5);
+        lists.add(l6);*/
+        int min2 = PascalsTriangle.minimumTotal(lists);
+        System.out.println(min2);
     }
 
     public static int knapsack(int[] weight, int n, int w) {
@@ -221,5 +260,46 @@ class PascalsTriangle {
             }
             System.out.println();
         }
+    }
+
+    public static int minimumTotal(List<List<Integer>> triangle) {
+        int size = triangle.size();
+        int[][] state = new int[size][size];
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                state[i][j] = Integer.MIN_VALUE;
+            }
+        }
+        state[0][0] = triangle.get(0).get(0);
+        for (int i = 1; i < size; i++) {
+            for (int j = 0; j < i + 1; j++) {
+                if (state[i - 1][j] != Integer.MIN_VALUE) {
+                    int left = state[i - 1][j] + triangle.get(i).get(j);
+                    int right = state[i - 1][j] + triangle.get(i).get(j + 1);
+                    if (state[i][j] == Integer.MIN_VALUE) {
+                        state[i][j] = left;
+                    }
+                    if (state[i][j+1] == Integer.MIN_VALUE) {
+                        state[i][j + 1] = right;
+                    }
+                    if (left < state[i][j]) {
+                        state[i][j] = left;
+                    }
+                    if (right < state[i][j + 1]) {
+                        state[i][j + 1] = right;
+                    }
+                }
+            }
+        }
+        int min = Integer.MAX_VALUE;
+        for (int i = 0; i < size; i++) {
+            if (state[size - 1][i] == Integer.MIN_VALUE) {
+                continue;
+            }
+            if (state[size - 1][i] < min) {
+                min = state[size - 1][i];
+            }
+        }
+        return min;
     }
 }
