@@ -1,3 +1,5 @@
+import java.util.Random;
+
 /**
  * @author hejianglong
  * @date 2019/7/23
@@ -5,12 +7,27 @@
 public class dynamicp {
 
     public static void main(String[] args) {
-        int[] weight = new int[]{2,2,4,6,3};
+       /* int[] weight = new int[]{2,2,4,6,3};
 
         int rs = knapsack2(weight, weight.length, 9);
         int rs2 = KnaspackPlus.knaspack(KnaspackPlus.weights, KnaspackPlus.prices, KnaspackPlus.n, KnaspackPlus.w);
         System.out.println(rs);
-        System.out.println(rs2);
+        System.out.println(rs2);*/
+        int[][] data = PascalsTriangle.getData(5);
+        System.out.println("构造的杨辉三角如下");
+        for (int i = 0; i < data.length; i++) {
+            for (int j = 0; j < data[i].length; j++) {
+                if (data[i][j] == -1) {
+                    continue;
+                }
+                System.out.print(data[i][j] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+        System.out.println("动态规划生成树如下");
+        int min = PascalsTriangle.path(data, 5);
+        System.out.println("杨辉三角到达低端最短结点值合为: " + min);
     }
 
     public static int knapsack(int[] weight, int n, int w) {
@@ -139,6 +156,70 @@ class Tabao {
         }
         if (j != 0) {
             System.out.println(items[0]);
+        }
+    }
+}
+class PascalsTriangle {
+
+    /**
+     * @param n 几层
+     * @return
+     */
+    public static int[][] getData(int n) {
+        Random random = new Random();
+        int[][] data = new int[n][n];
+        // 初始化 -1 之后标示没有值
+        for (int i = 0; i < data.length; i++) {
+            for (int j = 0; j < data[i].length; j++) {
+                data[i][j] = -1;
+            }
+        }
+        for (int i = 0; i < data.length; i++) {
+            for (int j = 0; j < i + 1; j++) {
+                data[i][j] = random.nextInt(10);
+            }
+        }
+        return data;
+    }
+    public static int path(int[][] data, int n) {
+        int[][] state = new int[n][n];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                state[i][j] = -1;
+            }
+        }
+        state[0][0] = data[0][0];
+        for (int i = 1; i < n; i++) {
+            for (int j = 0; j < i + 1; j++) {
+                if (state[i- 1][j] != -1) {
+                    state[i][j] = state[i - 1][j] + data[i][j];
+                    state[i][j+1] = state[i - 1][j] + data[i][j + 1];
+                }
+            }
+        }
+        int min = Integer.MAX_VALUE;
+        print(state);
+        for (int i = n - 1; i >= 0; i--) {
+            if (state[n - 1][i] == -1) {
+                continue;
+            }
+            if (state[n - 1][i] < min) {
+                min = state[n - 1][i];
+            }
+        }
+        return min;
+    }
+
+    private static void print(int[][] states) {
+        int length = states.length;
+        for (int i = 0; i < length; i++) {
+            for (int j = 0; j < length; j++) {
+                if (states[i][j] == -1) {
+                    continue;
+                }
+                System.out.print(states[i][j] + " ");
+            }
+            System.out.println();
         }
     }
 }
