@@ -1,3 +1,5 @@
+package dynamicp;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -6,13 +8,13 @@ import java.util.Random;
  * @author hejianglong
  * @date 2019/7/23
  */
-public class dynamicp {
+public class Dynamicp {
 
     public static void main(String[] args) {
        /* int[] weight = new int[]{2,2,4,6,3};
 
         int rs = knapsack2(weight, weight.length, 9);
-        int rs2 = KnaspackPlus.knaspack(KnaspackPlus.weights, KnaspackPlus.prices, KnaspackPlus.n, KnaspackPlus.w);
+        int rs2 = dynamicp.KnaspackPlus.knaspack(dynamicp.KnaspackPlus.weights, dynamicp.KnaspackPlus.prices, dynamicp.KnaspackPlus.n, dynamicp.KnaspackPlus.w);
         System.out.println(rs);
         System.out.println(rs2);*/
         int[][] data = PascalsTriangle.getData(5);
