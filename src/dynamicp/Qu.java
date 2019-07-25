@@ -9,27 +9,7 @@ public class Qu {
     private static int minDist = Integer.MIN_VALUE;
 
     public static void main(String[] args) {
-        int[][] w = new int[4][4];
-        w[0][0] = 1;
-        w[0][1] = 3;
-        w[0][2] = 5;
-        w[0][3] = 9;
-
-        w[1][0] = 2;
-        w[1][1] = 1;
-        w[1][2] = 3;
-        w[1][3] = 4;
-
-        w[2][0] = 5;
-        w[2][1] = 2;
-        w[2][2] = 6;
-        w[2][3] = 7;
-
-        w[3][0] = 6;
-        w[3][1] = 8;
-        w[3][2] = 4;
-        w[3][3] = 3;
-        minDistBT(0,0,0,w,3);
+        System.out.println(minMoney(10));
     }
 
     public static void minDistBT(int i, int j, int dist, int[][] w, int n) {
@@ -50,7 +30,32 @@ public class Qu {
 
     private static int minNum = Integer.MAX_VALUE;
 
-    public static void lessMoney() {
+    private static int[] value = {1,3,5};
 
+    public static int minMoney(int w) {
+        boolean[][] state = new boolean[3][16];
+        state[0][0] = false;
+        state[0][1] = true;
+        state[0][3] = true;
+        state[0][5] = true;
+        if (w == 1 || w == 3 || w == 5) {
+            return 1;
+        }
+        for (int i = 1; i < 3; i++) {
+            for (int j = 0; j < 16; j++) {
+                if (state[i - 1][j]) {
+                    int v = j + value[0];
+                    int v1 = j + value[1];
+                    int v2 = j + value[2];
+                    if (v == w || v1 == w || v2 == w) {
+                        return i + 1;
+                    }
+                    state[i][v] = true;
+                    state[i][v1] = true;
+                    state[i][v2] = true;
+                }
+            }
+        }
+        return -1;
     }
 }
