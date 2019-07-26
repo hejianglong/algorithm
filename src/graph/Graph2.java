@@ -45,43 +45,34 @@ public class Graph2 {
         // 用来还原最短路径
         int[] predecessor = new int[this.v];
         Vertex[] vertices = new Vertex[this.v];
-        for (int i = 0; i < this.v; i++) {
+        for (int i = 0; i < v; i++) {
             vertices[i] = new Vertex(i, Integer.MAX_VALUE);
         }
-        // 构建小顶端
-        PriorityQueue queue = new PriorityQueue(this.v);
-        // 标记是否进入过队列
-        boolean[] inqueue = new boolean[this.v];
-        vertices[s].dist = 0;
+        PriorityQueue queue = new PriorityQueue(v);
         queue.add(vertices[s]);
-        inqueue[s] = true;
+        boolean[] inQueue = new boolean[v];
+        inQueue[s] = true;
         while (!queue.isEmpty()) {
-            Vertex minVertex = queue.poll();
-            // 最短路径产生
-            if (minVertex.id == t) {
+            Vertex first = queue.poll();
+            if (first.id == t) {
                 break;
             }
-            for (int i = 0; i < adj[minVertex.id].size(); i++) {
-                // 取出一条 minVetex 相连的边
-                Edge e = adj[minVertex.id].get(i);
-                // minVertex -> nextVertex
-                Vertex nextVertex = vertices[e.tid];
-                if (minVertex.dist + e.w < nextVertex.dist) {
-                    // 更新 next 的 dist
-                    nextVertex.dist = minVertex.dist + e.w;
-                    predecessor[nextVertex.id] = minVertex.id;
-                    if (inqueue[nextVertex.id]) {
-                        // 更新队列中的 dist 值
+            for (int i = 0; i < adj[first.id].size(); i++) {
+                Edge nextEdge = adj[first.id].get(i);
+                Vertex nextVertex = vertices[nextEdge.tid];
+                if (first.dist + nextEdge.w < nextVertex.dist) {
+                    nextVertex.dist = first.dist + nextEdge.w;
+                    predecessor[nextVertex.id] = first.id;
+                    if (inQueue[nextVertex.id]) {
                         queue.update(nextVertex);
                     } else {
                         queue.add(nextVertex);
-                        inqueue[nextVertex.id] = true;
+                        inQueue[nextVertex.id] = true;
                     }
                 }
             }
         }
-        // 输出最短路径
-        System.out.println(s);
+        System.out.println("->" + s);
         print(s, t, predecessor);
     }
 
