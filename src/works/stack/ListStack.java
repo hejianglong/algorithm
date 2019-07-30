@@ -7,7 +7,6 @@ package works.stack;
 public class ListStack<T> {
 
     private Node<T> head;
-    private Node<T> tail;
 
     public static void main(String[] args) {
         ListStack<Integer> stack = new ListStack<>();
@@ -26,7 +25,7 @@ public class ListStack<T> {
     public void push(T t) {
         Node newNode = new Node<>(t, null);
         if (head == null) {
-            head = tail = newNode;
+            head  = newNode;
             return;
         }
         newNode.next = head;
