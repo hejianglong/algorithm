@@ -24,7 +24,18 @@ public class Test {
         int[] arr = new int[]{1,2,3,4,5,6};
         //compareSort(arr);
         //selectSort(arr);
-        compareSort(arr);
+        //compareSort(arr);
+        f1();
+    }
+
+    private static void f1() {
+        float sum;
+        int i;
+        sum = 0;
+        for (i = 1; i <= 100; i++) {
+            sum += 0.1;
+        }
+        System.out.println(sum);
     }
 
     private static void insertSort(int[] arr) {

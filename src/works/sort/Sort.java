@@ -10,7 +10,7 @@ public class Sort {
 
     public static void main(String[] args) {
         int[] arr = {4,5,6,3,2,1};
-        mpSort(arr);
+        quickSort(arr);
         for (int i = 0; i < arr.length; i++) {
             System.out.print(arr[i] + " ");
         }
@@ -58,5 +58,78 @@ public class Sort {
             }
             arr[j + 1] = value;
         }
+    }
+
+    public static void gbSort(int[] arr) {
+        mergeSort(arr, 0, arr.length - 1);
+    }
+
+    private static void mergeSort(int[] arr, int p, int r) {
+        if (p >= r) {
+            return;
+        }
+        int m = p + (r - p) / 2;
+        mergeSort(arr, p, m);
+        mergeSort(arr, m + 1, r);
+        merge(arr, p, m, r);
+    }
+
+    private static void merge(int[] arr, int p, int m, int r) {
+        int[] tmp = new int[r - p + 1];
+        int i = p;
+        int j = m + 1;
+        int k = 0;
+        while (i <= m && j <= r) {
+            if (arr[i] > arr[j]) {
+                tmp[k++] = arr[j++];
+            } else {
+                tmp[k++] = arr[i++];
+            }
+        }
+        int start = i;
+        int end = m;
+        if (j <= r) {
+            start = j;
+            end = r;
+        }
+        while (start <= end) {
+            tmp[k++] = arr[start++];
+        }
+        for (i = 0; i <= r - p; i++) {
+            arr[p + i] = tmp[i];
+        }
+    }
+
+    public static void quickSort(int[] arr) {
+        quickSort(arr, 0, arr.length - 1);
+    }
+
+    private static void quickSort(int[] arr, int p, int r) {
+        if (p >= r) {
+            return;
+        }
+        int partition = partition(arr, p, r);
+        quickSort(arr, p, partition - 1);
+        quickSort(arr, partition + 1, r);
+    }
+
+    private static int partition(int[] arr, int p, int r) {
+        int pivot = arr[r];
+        int i = p;
+        for (int j = p; j < r; j++) {
+            if (arr[j] < pivot) {
+                if (i == j) {
+                    i++;
+                } else {
+                    int tmp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = tmp;
+                }
+            }
+        }
+        int tmp = arr[i];
+        arr[i] = pivot;
+        arr[r] = tmp;
+        return i;
     }
 }
